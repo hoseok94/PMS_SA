@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypnos Hotel PMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-page">
+  <div class="login-bg"></div>
+  <div class="login-card">
+    <div class="login-logo">
+      <i class="fas fa-hotel"></i>
+      <h1>Hypnos</h1>
+      <p>Property Management System</p>
+    </div>
+    <form id="loginForm" class="login-form">
+      <div class="form-group">
+        <label><i class="fas fa-user"></i> ชื่อผู้ใช้</label>
+        <input type="text" id="loginUsername" placeholder="กรอกชื่อผู้ใช้" required>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-lock"></i> รหัสผ่าน</label>
+        <input type="password" id="loginPassword" placeholder="กรอกรหัสผ่าน" required>
+      </div>
+      <div id="loginError" class="alert alert-danger" style="display:none"></div>
+      <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+        <span>เข้าสู่ระบบ</span><i class="fas fa-arrow-right"></i>
+      </button>
+    </form>
+    <p class="login-hint">Default: admin / hotel1234</p>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp" style="display:none">
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-hotel"></i>
+      <div>
+        <h2>Hypnos</h2>
+        <span>Hypnos PMS</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i><span>แดชบอร์ด</span></a>
+      <a href="#" class="nav-item" data-page="rooms"><i class="fas fa-door-open"></i><span>จัดการห้องพัก</span></a>
+      <a href="#" class="nav-item" data-page="booking"><i class="fas fa-calendar-plus"></i><span>จองห้องพัก</span></a>
+      <a href="#" class="nav-item" data-page="bookingList"><i class="fas fa-list-alt"></i><span>รายการจอง</span></a>
+      <a href="#" class="nav-item" data-page="checkin"><i class="fas fa-sign-in-alt"></i><span>เช็คอิน</span></a>
+      <a href="#" class="nav-item" data-page="checkout"><i class="fas fa-sign-out-alt"></i><span>เช็คเอาท์</span></a>
+      <a href="#" class="nav-item" data-page="payment"><i class="fas fa-credit-card"></i><span>ชำระเงิน</span></a>
+      <a href="#" class="nav-item" data-page="customers"><i class="fas fa-users"></i><span>ข้อมูลลูกค้า</span></a>
+      <a href="#" class="nav-item" data-page="reports"><i class="fas fa-chart-bar"></i><span>รายงาน</span></a>
+      <a href="#" class="nav-item" data-page="employees"><i class="fas fa-user-tie"></i><span>พนักงาน</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <span id="userName">-</span>
+          <small id="userPosition">-</small>
+          <span id="userRoleBadge" class="badge badge-gray" style="margin-top:4px;font-size:.65rem"></span>
+        </div>
+      </div>
+      <button onclick="logout()" class="btn-logout" title="ออกจากระบบ"><i class="fas fa-power-off"></i></button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="topbar">
+      <button onclick="toggleSidebar()" class="menu-toggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title" id="pageTitle">แดชบอร์ด</div>
+      <div class="topbar-right">
+        <span id="currentDate"></span>
+      </div>
+    </header>
+
+    <div class="page-content" id="pageContent">
+      <!-- Pages load here -->
+    </div>
+  </main>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal-overlay" style="display:none">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <h3 id="modalTitle">Modal</h3>
+      <button onclick="closeModal()" class="modal-close">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/pages/dashboard.js"></script>
+<script src="js/pages/rooms.js"></script>
+<script src="js/pages/booking.js"></script>
+<script src="js/pages/bookingList.js"></script>
+<script src="js/pages/checkin.js"></script>
+<script src="js/pages/checkout.js"></script>
+<script src="js/pages/payment.js"></script>
+<script src="js/pages/customers.js"></script>
+<script src="js/pages/reports.js"></script>
+<script src="js/pages/employees.js"></script>
+<script src="js/pages/housekeeping.js"></script>
+<script src="js/pages/maintenance.js"></script>
+<script src="js/pages/accounting.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
